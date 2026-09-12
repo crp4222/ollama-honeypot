@@ -60,6 +60,11 @@ of agent history files. Read and adapt it to synthetic files in a disposable cli
 environment before connecting any agent. A prompt is not a filesystem access rule;
 enforce the intended scope through the client's actual permissions and isolation.
 
+For the documented experiment, use [the educational prompt](config/system.educational.txt)
+instead. It is the same bounded prompt used by the automated OpenCode runner and
+asks only for the synthetic files named in the task. The setup below copies it
+into the disposable lab checkout before connecting a real model.
+
 ## Where the observation happens
 
 ```mermaid
@@ -133,6 +138,8 @@ uses the cloud account already signed into Ollama. On the server host:
 
 ```sh
 ollama pull kimi-k3:cloud
+# In the disposable lab checkout, select the bounded educational prompt.
+cp config/system.educational.txt config/system.txt
 python3 scripts/compose_local.py --bind 127.0.0.1 --mode local
 ```
 
@@ -175,8 +182,26 @@ bypass this endpoint; check the selected provider for every part of the session.
 
 ### Put PrivAiTe before the capture point
 
-Install [PrivAiTe and its detection models](https://github.com/crp4222/PrivAiTe#quick-start)
-first. This example runs PrivAiTe as a native process on the lab host. Save the
+The 0.4.3 fixes measured in this lab are in source commit
+`7798804a27c5558d550e48b667e2fa2a83bdded6`. At this validation, PyPI still serves
+0.4.2, so an unpinned `pip install privaite` does not include those fixes.
+Install the tested source in its own environment:
+
+```sh
+git clone https://github.com/crp4222/PrivAiTe.git
+cd PrivAiTe
+git checkout 7798804a27c5558d550e48b667e2fa2a83bdded6
+python3 -m venv .venv
+.venv/bin/python -m pip install -e .
+.venv/bin/python -m spacy download en_core_web_lg
+.venv/bin/python -m spacy download fr_core_news_md
+```
+
+The first ONNX startup also downloads the pinned detector model. Allow for this
+installation cost before measuring request latency. For the automated OpenCode
+runner, supply this checkout with `--privaite /path/to/PrivAiTe`.
+
+This example runs PrivAiTe as a native process on the lab host. Save the
 following as a separate PrivAiTe configuration, for example `privaite-lab.yaml`:
 
 ```yaml
@@ -215,10 +240,10 @@ pii:
     tool_calls: false
 ```
 
-From the environment where PrivAiTe is installed:
+From that PrivAiTe checkout, with `privaite-lab.yaml` saved there:
 
 ```sh
-PRIVAITE_API_KEYS=lab-local-only python -m privaite --config privaite-lab.yaml
+PRIVAITE_API_KEYS=lab-local-only .venv/bin/python -m privaite --config privaite-lab.yaml
 ```
 
 `lab-local-only` is a disposable example client key. In the OpenCode configuration,
