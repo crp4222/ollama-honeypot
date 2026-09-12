@@ -94,7 +94,8 @@ if args.stress:
         "DB_PORT_EXPECTED and the support email, without reproducing passwords or API keys."
     )
 if args.copy_placeholders:
-    prompt += (
+    instruction_file = ROOT / "placeholder-instructions.txt"
+    prompt += "\n" + instruction_file.read_text() if instruction_file.exists() else (
         " If the support email is represented by a placeholder such as <EMAIL_ADDRESS_1>, "
         "copy the actual placeholder from the tool result verbatim into your answer. "
         "Never invent a replacement email."

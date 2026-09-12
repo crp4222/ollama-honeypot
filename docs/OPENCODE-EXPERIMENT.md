@@ -4,6 +4,9 @@ Measured on **2026-09-12**, using actual OpenCode tool execution and cloud model
 responses. This is a small reproducible integration experiment, not a detection
 benchmark or a claim that every secret will be caught.
 
+The [0.4.3 follow-up](PRIVAITE-FIX-VALIDATION.md) measures subsequent PrivAiTe
+performance and boundary fixes. The results below describe the original source.
+
 ## Setup
 
 | Component | Tested configuration |

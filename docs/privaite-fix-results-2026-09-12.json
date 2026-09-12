@@ -1,0 +1,1458 @@
+{
+  "date_utc": "2026-09-12T13:02:42Z",
+  "privaite_tested_source_commit": "7798804a27c5558d550e48b667e2fa2a83bdded6",
+  "source_state_note": "The 0.4.3 source was uncommitted during the full run and committed afterwards.",
+  "model": "kimi-k3:cloud",
+  "opencode_version": "1.18.30",
+  "fixture_bytes": {
+    "README.md": 64,
+    ".env": 274,
+    "customer.json": 165,
+    "logs/batch-1.log": 27914,
+    "logs/batch-2.log": 27914,
+    "logs/batch-3.log": 27914,
+    "logs/batch-4.log": 27914,
+    "logs/verbose.log": 27879,
+    "logs/build.log": 379
+  },
+  "full_matrix": [
+    {
+      "label": "baseline-1",
+      "mode": "baseline",
+      "long": false,
+      "wall_seconds": 8.12,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          0.898,
+          1.1097
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "baseline-2",
+      "mode": "baseline",
+      "long": false,
+      "wall_seconds": 7.029,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          0.7614,
+          0.8244
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "baseline-3",
+      "mode": "baseline",
+      "long": false,
+      "wall_seconds": 10.895,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          3.3686,
+          0.7232
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "baseline-deny-env",
+      "mode": "baseline",
+      "long": false,
+      "wall_seconds": 15.162,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 3,
+      "tools": [
+        {
+          "name": "glob",
+          "status": "completed"
+        },
+        {
+          "name": "glob",
+          "status": "completed"
+        },
+        {
+          "name": "glob",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "error"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": true,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          2.4479,
+          2.5124,
+          0.9303
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "baseline-long",
+      "mode": "baseline",
+      "long": true,
+      "wall_seconds": 7.577,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          0.778,
+          0.7134
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "baseline-stress",
+      "mode": "baseline",
+      "long": false,
+      "wall_seconds": 14.368,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": true,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true
+      },
+      "email_local_parts_found": {
+        "camille": true,
+        "martin": true
+      },
+      "pii_seconds": [],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [],
+      "first_body_seconds": {
+        "gateway": [
+          2.1759,
+          5.296
+        ],
+        "privaite": []
+      }
+    },
+    {
+      "label": "protected-1",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 12.532,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": false,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        2.4553,
+        1.5403
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          1.0492,
+          1.0561
+        ],
+        "privaite": [
+          3.776,
+          2.6062
+        ]
+      }
+    },
+    {
+      "label": "protected-2",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 11.833,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": false,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.4001,
+        0.294
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.7602,
+          3.2853
+        ],
+        "privaite": [
+          1.1683,
+          3.5888
+        ]
+      }
+    },
+    {
+      "label": "protected-3",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 9.08,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.4005,
+        0.0004
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.7664,
+          0.7265
+        ],
+        "privaite": [
+          1.1736,
+          0.7369
+        ]
+      }
+    },
+    {
+      "label": "protected-concurrent-1",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 9.103,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.7194,
+        0.0004
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          1.2181,
+          0.8435
+        ],
+        "privaite": [
+          1.9482,
+          0.8544
+        ]
+      }
+    },
+    {
+      "label": "protected-concurrent-2",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 12.087,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.7551,
+        0.0004
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          1.1136,
+          0.8455
+        ],
+        "privaite": [
+          1.8789,
+          0.8571
+        ]
+      }
+    },
+    {
+      "label": "protected-copy-1",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 8.82,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.5152,
+        0.4275
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.7466,
+          0.7365
+        ],
+        "privaite": [
+          1.2694,
+          1.1712
+        ]
+      }
+    },
+    {
+      "label": "protected-copy-2",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 7.617,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": true,
+        "card": true
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": true,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.4868,
+        0.0004
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.7667,
+          0.7613
+        ],
+        "privaite": [
+          1.2628,
+          0.7714
+        ]
+      }
+    },
+    {
+      "label": "protected-long",
+      "mode": "protected",
+      "long": true,
+      "wall_seconds": 15.948,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.6215,
+        7.4976
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.8129,
+          0.7579
+        ],
+        "privaite": [
+          1.4433,
+          8.2645
+        ]
+      }
+    },
+    {
+      "label": "protected-long-warm",
+      "mode": "protected",
+      "long": true,
+      "wall_seconds": 11.801,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 3,
+      "tools": [
+        {
+          "name": "glob",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": false,
+      "deny_env": false,
+      "copy_placeholders": false,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.6341,
+        0.1981,
+        0.0004
+      ],
+      "gateway_statuses": [
+        200,
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.8457,
+          1.3384,
+          0.7821
+        ],
+        "privaite": [
+          1.4893,
+          1.545,
+          0.7919
+        ]
+      }
+    },
+    {
+      "label": "protected-stress",
+      "mode": "protected",
+      "long": false,
+      "wall_seconds": 26.163,
+      "exit_code": 0,
+      "timed_out": false,
+      "requests_to_model": 2,
+      "tools": [
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        },
+        {
+          "name": "read",
+          "status": "completed"
+        }
+      ],
+      "tool_output_contains": {
+        "openai_key": true,
+        "github_token": true,
+        "db_password": true,
+        "email": true,
+        "name": true,
+        "phone": false,
+        "card": false
+      },
+      "endpoint_contains_full_value": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false,
+        "email": false,
+        "name": false,
+        "phone": false,
+        "card": false
+      },
+      "diagnosis_correct": true,
+      "email_returned_to_client": true,
+      "errors": 0,
+      "app_port_correct": false,
+      "database_locked": false,
+      "stress": true,
+      "deny_env": false,
+      "copy_placeholders": true,
+      "secret_fragment_8_found": {
+        "openai_key": false,
+        "github_token": false,
+        "db_password": false
+      },
+      "email_local_parts_found": {
+        "camille": false,
+        "martin": false
+      },
+      "pii_seconds": [
+        0.5497,
+        16.9124
+      ],
+      "gateway_statuses": [
+        200,
+        200
+      ],
+      "proxy_statuses": [
+        200,
+        200
+      ],
+      "first_body_seconds": {
+        "gateway": [
+          0.8018,
+          1.9164
+        ],
+        "privaite": [
+          1.3607,
+          18.8381
+        ]
+      }
+    }
+  ],
+  "window_replay": {
+    "method": "Same captured synthetic protected-stress request from the original experiment, warmed models, whole-text detection cache disabled, complete messages processed. Window reuse off/on/on/off.",
+    "runs": [
+      {
+        "window_reuse": false,
+        "pii_seconds": 33.2001,
+        "onnx_runs": 40,
+        "onnx_seconds": 32.8535,
+        "same_output_mapping_and_spans": true
+      },
+      {
+        "window_reuse": true,
+        "pii_seconds": 19.223,
+        "onnx_runs": 19,
+        "onnx_seconds": 13.765,
+        "same_output_mapping_and_spans": true
+      },
+      {
+        "window_reuse": true,
+        "pii_seconds": 19.2309,
+        "onnx_runs": 19,
+        "onnx_seconds": 13.7749,
+        "same_output_mapping_and_spans": true
+      },
+      {
+        "window_reuse": false,
+        "pii_seconds": 33.1649,
+        "onnx_runs": 40,
+        "onnx_seconds": 32.7575,
+        "same_output_mapping_and_spans": true
+      }
+    ]
+  },
+  "validation": {
+    "privaite_tests_passed": 565,
+    "privaite_tests_skipped": 1,
+    "honeypot_tests_passed": 37,
+    "honeypot_subtests_passed": 31,
+    "benchmark_span_recall_percent": 84.9,
+    "benchmark_strict_recall_percent": 81.0,
+    "benchmark_clean_false_positives": 2,
+    "benchmark_clean_documents": 14
+  },
+  "downstream_structure": {
+    "email_assignment_label_preserved": true,
+    "distinct_email_placeholders": 1,
+    "matched_path_wrappers": 3
+  },
+  "instruction_sha256": "64f15eb94da0810905aa755dbc406b0a8a0af9da6c20e0743be5dc9a7f813628",
+  "english_instruction_file_test": {
+    "sha256": "64f15eb94da0810905aa755dbc406b0a8a0af9da6c20e0743be5dc9a7f813628",
+    "results": [
+      {
+        "label": "baseline-1",
+        "mode": "baseline",
+        "long": false,
+        "wall_seconds": 7.493,
+        "exit_code": 0,
+        "timed_out": false,
+        "requests_to_model": 2,
+        "tools": [
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          }
+        ],
+        "tool_output_contains": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "endpoint_contains_full_value": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "diagnosis_correct": true,
+        "email_returned_to_client": true,
+        "errors": 0,
+        "app_port_correct": true,
+        "database_locked": false,
+        "stress": false,
+        "deny_env": false,
+        "copy_placeholders": false,
+        "secret_fragment_8_found": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true
+        },
+        "email_local_parts_found": {
+          "camille": true,
+          "martin": true
+        },
+        "pii_seconds": [],
+        "gateway_statuses": [
+          200,
+          200
+        ],
+        "proxy_statuses": [],
+        "first_body_seconds": {
+          "gateway": [
+            0.951,
+            0.8231
+          ],
+          "privaite": []
+        }
+      },
+      {
+        "label": "protected-1",
+        "mode": "protected",
+        "long": false,
+        "wall_seconds": 12.895,
+        "exit_code": 0,
+        "timed_out": false,
+        "requests_to_model": 2,
+        "tools": [
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          }
+        ],
+        "tool_output_contains": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "endpoint_contains_full_value": {
+          "openai_key": false,
+          "github_token": false,
+          "db_password": false,
+          "email": false,
+          "name": false,
+          "phone": false,
+          "card": false
+        },
+        "diagnosis_correct": true,
+        "email_returned_to_client": true,
+        "errors": 0,
+        "app_port_correct": true,
+        "database_locked": false,
+        "stress": false,
+        "deny_env": false,
+        "copy_placeholders": true,
+        "secret_fragment_8_found": {
+          "openai_key": false,
+          "github_token": false,
+          "db_password": false
+        },
+        "email_local_parts_found": {
+          "camille": false,
+          "martin": false
+        },
+        "pii_seconds": [
+          2.6014,
+          1.973
+        ],
+        "gateway_statuses": [
+          200,
+          200
+        ],
+        "proxy_statuses": [
+          200,
+          200
+        ],
+        "first_body_seconds": {
+          "gateway": [
+            0.9859,
+            0.7561
+          ],
+          "privaite": [
+            3.8555,
+            2.7372
+          ]
+        }
+      }
+    ]
+  }
+}

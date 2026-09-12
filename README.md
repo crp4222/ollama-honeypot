@@ -285,6 +285,11 @@ an A/B comparison with PrivAiTe, including cold-cache latency, larger tool resul
 concurrent clients, and a denied read. A macOS runner generates its own fixtures
 and records both disclosure and task-completion checks.
 
+The [PrivAiTe 0.4.3 follow-up](docs/PRIVAITE-FIX-VALIDATION.md) completed all 16
+OpenCode conversations without a timeout. Four-log PII processing fell from
+31.91 to 17.46 seconds in the observed runs. It also checks preserved labels and
+delimiters, and documents the remaining dependence on placeholder-copy instructions.
+
 Exploratory operator observations motivated the PrivAiTe comparison: some credential
 values were replaced with `[SECRET]`, while partial replacements and identifying
 paths remained visible. Those observations are not a published, controlled leak-rate

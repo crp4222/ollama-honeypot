@@ -7,6 +7,7 @@ loopback services; leaves existing services and configuration alone.
 """
 
 import argparse
+import hashlib
 import json
 import os
 import platform
@@ -216,7 +217,14 @@ def main():
     parser.add_argument(
         "--quick", action="store_true", help="Two conversations only; full matrix is the default"
     )
+    parser.add_argument(
+        "--placeholder-instructions",
+        type=Path,
+        help="English instruction file to use in explicit-copy cases instead of the short default",
+    )
     args = parser.parse_args()
+    if args.placeholder_instructions and not args.placeholder_instructions.is_file():
+        parser.error("Placeholder instruction file does not exist")
     if sys.platform != "darwin" or not Path("/usr/bin/sandbox-exec").exists():
         parser.error(
             "This runner requires the macOS sandbox; use a disposable VM for other platforms"
@@ -242,6 +250,13 @@ def main():
     root = Path(tempfile.mkdtemp(prefix="ollama-opencode-e2e-", dir="/private/tmp"))
     print(f"Private synthetic artifacts: {root}", flush=True)
     metadata = setup(root, privaite, opencode, args.ollama_url)
+    if args.placeholder_instructions:
+        instructions = args.placeholder_instructions.read_text()
+        (root / "placeholder-instructions.txt").write_text(instructions)
+        metadata["placeholder_instructions_sha256"] = hashlib.sha256(
+            instructions.encode()
+        ).hexdigest()
+        write_json(root / "metadata.json", metadata)
     # Services need model caches, but receive no provider-key environment from
     # the parent. Only Ollama itself uses the existing cloud authentication.
     env = {
