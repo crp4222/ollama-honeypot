@@ -1,0 +1,68 @@
+name: ollama-observation-lab
+x-restricted: &restricted
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  pids_limit: 64
+  restart: "no"
+  logging:
+    driver: json-file
+    options: {max-size: "5m", max-file: "2"}
+
+services:
+  edge:
+    <<: *restricted
+    image: nginx:stable-alpine
+    user: "101:101"
+    entrypoint: [nginx, -g, "daemon off;"]
+    ports: ["${BIND_HOST:-127.0.0.1}:${PORT:-11435}:8080"]
+    networks: [ingress, frontend]
+    volumes: ["./config/edge.conf:/etc/nginx/nginx.conf:ro"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,uid=101,gid=101"]
+    mem_limit: 96m
+    cpus: 0.5
+    depends_on: [gateway]
+
+  gateway:
+    <<: *restricted
+    build: .
+    user: "10001:10001"
+    networks: [frontend, backend]
+    environment:
+      HONEYPOT_MODE: "${HONEYPOT_MODE:-local}"
+      UPSTREAM_URL: http://relay:8081
+      SYSTEM_PROMPT_FILE: /app/config/system.txt
+      CAPTURE_DIR: /data
+      TRUST_EDGE_IP: "1"
+      MAX_OUTPUT_TOKENS: "${MAX_OUTPUT_TOKENS:-2048}"
+      MAX_REQUESTS_PER_DAY: "${MAX_REQUESTS_PER_DAY:-30}"
+      MAX_REQUESTS_TOTAL: "${MAX_REQUESTS_TOTAL:-100}"
+      MAX_CONCURRENT: "${MAX_CONCURRENT:-2}"
+      REQUEST_TIMEOUT_SECONDS: "${REQUEST_TIMEOUT_SECONDS:-120}"
+    volumes:
+      # Monter le dossier pour suivre les sauvegardes par remplacement du fichier.
+      - "./config:/app/config:ro"
+      - captures:/data
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=16m,uid=10001,gid=10001"]
+    mem_limit: 256m
+    cpus: 1
+    depends_on: [relay]
+
+  relay:
+    <<: *restricted
+    image: nginx:stable-alpine
+    user: "101:101"
+    entrypoint: [nginx, -g, "daemon off;"]
+    networks: [backend, egress]
+    volumes: ["./config/relay.local.conf:/etc/nginx/nginx.conf:ro"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=16m,uid=101,gid=101"]
+    mem_limit: 96m
+    cpus: 0.5
+
+networks:
+  ingress: {}
+  frontend: {internal: true}
+  backend: {internal: true}
+  egress: {}
+volumes:
+  captures: {}

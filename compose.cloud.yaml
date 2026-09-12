@@ -1,0 +1,11 @@
+# Optional direct-cloud backend. Not used for the existing local Ollama.
+services:
+  gateway:
+    environment:
+      OLLAMA_API_KEY_FILE: /run/secrets/ollama_api_key
+    secrets: [ollama_api_key]
+  relay:
+    volumes: ["./config/relay.conf:/etc/nginx/nginx.conf:ro"]
+secrets:
+  ollama_api_key:
+    file: ./private/ollama_api_key

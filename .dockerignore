@@ -1,0 +1,8 @@
+.venv
+.git
+.env
+private
+captures
+tests
+__pycache__
+.pytest_cache
