@@ -138,17 +138,24 @@ configuration in the lab example, and evidence of the remaining limitations.
 ## Reproduce
 
 On macOS, install OpenCode outside your real home directory, install this lab's
-dependencies in `.venv`, and install PrivAiTe with its detector models already
-cached. The existing local Ollama must be signed in and able to run `kimi-k3:cloud`.
+dependencies in `.venv`, and install PrivAiTe 0.4.3 in `.venv-privaite` as shown in
+the [README](../README.md#put-privaite-before-the-capture-point). Start the proxy
+once and wait for `/ready` so its detector models are cached before using the
+offline test runner. The existing local Ollama must be signed in and able to run
+`kimi-k3:cloud`.
 These commands use that account for actual cloud inference:
 
 ```sh
-# From the lab checkout; adjust only the PrivAiTe checkout path.
-python3 scripts/test_opencode.py --privaite /path/to/PrivAiTe --quick
+# From the lab checkout, using the pip-installed release.
+python3 scripts/test_opencode.py --privaite-python .venv-privaite/bin/python --quick
 
 # Full matrix: 16 conversations, including large logs and two concurrent clients.
-python3 scripts/test_opencode.py --privaite /path/to/PrivAiTe
+python3 scripts/test_opencode.py --privaite-python .venv-privaite/bin/python
 ```
+
+For development against a source checkout, `--privaite /path/to/PrivAiTe` remains
+available. Choose one installation mode: the pip mode records its package version
+and imports the installed distribution; the checkout mode records a Git commit.
 
 The runner creates new loopback services and synthetic files under a private
 temporary directory, prints the directory location, and stops its services on

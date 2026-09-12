@@ -89,11 +89,13 @@ policy blocking, model-input masks, live offsets, structured boundaries and
 custom/secret punctuation. No production service is used to capture test inputs.
 
 ```sh
-python3 scripts/test_opencode.py --privaite /path/to/PrivAiTe
+python3 scripts/test_opencode.py --privaite-python .venv-privaite/bin/python
 
 # Exercise the exact English document in the protected quick conversation.
-python3 scripts/test_opencode.py --privaite /path/to/PrivAiTe --quick \
-  --placeholder-instructions /path/to/PrivAiTe/docs/placeholder-instructions.txt
+curl -fsSLo placeholder-instructions.txt \
+  https://raw.githubusercontent.com/crp4222/PrivAiTe/v0.4.3/docs/placeholder-instructions.txt
+python3 scripts/test_opencode.py --privaite-python .venv-privaite/bin/python --quick \
+  --placeholder-instructions placeholder-instructions.txt
 ```
 
 The optional instruction file is copied into the private artifact directory and
@@ -151,9 +153,30 @@ all capabilities dropped; only the edge published a loopback port. Test services
 and their volumes were removed afterwards. This smoke test exercises simulated
 capture; real model/tool behavior is covered by the OpenCode matrix above.
 
-The setup now supplies the same [bounded educational prompt](../config/system.educational.txt)
-as the tested runner and pins the PrivAiTe source installation. At this check,
-PyPI still serves 0.4.2; a plain `pip install privaite` will not reproduce the
-0.4.3 fixes. The pushed lab remains private, and it does not yet include a license
+The setup supplies the same [bounded educational prompt](../config/system.educational.txt)
+as the tested runner. At that pre-release check, PyPI still served 0.4.2; the
+current README uses the versioned 0.4.3 package. The pushed lab remains private,
+and it does not yet include a license
 file. Decide public access and licensing before describing it as an open-source
 project readers can reuse.
+
+## Published package validation
+
+[PrivAiTe 0.4.3](https://pypi.org/project/privaite/0.4.3/) was subsequently
+published from the tested commit, through the
+[successful PyPI workflow](https://github.com/crp4222/PrivAiTe/actions/runs/34706216342).
+The README now installs that numbered package. Git hashes above identify the
+historical measurements; they are not installation prerequisites.
+
+The public PyPI package and its two spaCy models were installed in a fresh Python
+environment. `pip check` passed, the imported package came from that environment,
+and all 58 Python files matched the validated source. An actual OpenCode quick run
+then used `--privaite-python` without a PrivAiTe checkout: **2/2 conversations and
+5/5 HTTP 200 requests completed**, with no timeout or checked canary disclosure in
+the protected conversation. Diagnosis and email restoration both passed with the
+full English instruction. Wall times were 7.49 seconds directly and 14.05 seconds
+protected, including an additional read chosen by the protected agent; total PII
+processing was 3.25 seconds. Initialization took 19.4 seconds with cached ONNX weights.
+
+Only the installed-package path was used for this check. The developer option
+`--privaite /path/to/PrivAiTe` remains available for source changes.

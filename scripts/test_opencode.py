@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real OpenCode A/B experiment on macOS, with generated synthetic files only.
 
-Requires both repositories' existing .venv installations, cached PrivAiTe models,
+Requires the lab's .venv, a PrivAiTe Python environment with cached models,
 OpenCode, and a local Ollama already signed into the cloud model. Uses new
 loopback services; leaves existing services and configuration alone.
 """
@@ -80,7 +80,7 @@ def wait_ready(child, url, timeout=120):
     raise TimeoutError("Test service did not become ready")
 
 
-def setup(root, privaite, opencode, ollama_url):
+def setup(root, privaite, privaite_python, opencode, ollama_url):
     workspace = root / "workspace"
     (workspace / "logs").mkdir(parents=True)
     alphabet = string.ascii_letters + string.digits
@@ -151,7 +151,11 @@ def setup(root, privaite, opencode, ollama_url):
     metadata = {
         "date_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "honeypot": str(REPO),
-        "privaite": str(privaite),
+        "privaite": str(privaite) if privaite is not None else None,
+        "privaite_python": str(privaite_python),
+        "privaite_version": command_output(
+            [str(privaite_python), "-c", "import privaite; print(privaite.__version__)"]
+        ),
         "opencode": str(opencode),
         "ollama_url": ollama_url,
         "gateway_port": gateway_port,
@@ -160,7 +164,10 @@ def setup(root, privaite, opencode, ollama_url):
         "platform": platform.platform(),
         "opencode_version": command_output([str(opencode), "--version"]),
         "honeypot_commit": command_output(["git", "-C", str(REPO), "rev-parse", "HEAD"]),
-        "privaite_commit": command_output(["git", "-C", str(privaite), "rev-parse", "HEAD"]),
+        "privaite_commit": (
+            command_output(["git", "-C", str(privaite), "rev-parse", "HEAD"])
+            if privaite is not None else None
+        ),
         "fixture_bytes": {
             str(p.relative_to(workspace)): p.stat().st_size
             for p in workspace.rglob("*")
@@ -206,11 +213,16 @@ def setup(root, privaite, opencode, ollama_url):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
+    installation = parser.add_mutually_exclusive_group(required=True)
+    installation.add_argument(
         "--privaite",
         type=Path,
-        required=True,
-        help="PrivAiTe checkout with .venv and cached models",
+        help="Developer mode: PrivAiTe checkout with .venv and cached models",
+    )
+    installation.add_argument(
+        "--privaite-python",
+        type=Path,
+        help="Python interpreter in the pip-installed PrivAiTe environment (no checkout needed)",
     )
     parser.add_argument("--opencode", default=shutil.which("opencode"))
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
@@ -240,8 +252,14 @@ def main():
     if not args.opencode:
         parser.error("OpenCode is not installed")
     opencode = Path(args.opencode).resolve()
-    privaite = args.privaite.resolve()
-    for python in (REPO / ".venv/bin/python", privaite / ".venv/bin/python"):
+    privaite = args.privaite.resolve() if args.privaite else None
+    # Keep the venv's interpreter path: resolving its symlink would select the
+    # base Python and lose the installed environment.
+    privaite_python = (
+        privaite / ".venv/bin/python" if privaite is not None
+        else args.privaite_python.expanduser().absolute()
+    )
+    for python in (REPO / ".venv/bin/python", privaite_python):
         if not python.exists():
             parser.error(f"Missing installed environment: {python}")
     if opencode.is_relative_to(Path.home().resolve()):
@@ -249,7 +267,7 @@ def main():
     os.umask(0o077)
     root = Path(tempfile.mkdtemp(prefix="ollama-opencode-e2e-", dir="/private/tmp"))
     print(f"Private synthetic artifacts: {root}", flush=True)
-    metadata = setup(root, privaite, opencode, args.ollama_url)
+    metadata = setup(root, privaite, privaite_python, opencode, args.ollama_url)
     if args.placeholder_instructions:
         instructions = args.placeholder_instructions.read_text()
         (root / "placeholder-instructions.txt").write_text(instructions)
@@ -274,14 +292,14 @@ def main():
         }
     )
     with ExitStack() as stack:
-        for role, repo, port, health in (
-            ("gateway", REPO, metadata["gateway_port"], "/"),
-            ("privaite", privaite, metadata["proxy_port"], "/ready"),
+        for role, python, port, health in (
+            ("gateway", REPO / ".venv/bin/python", metadata["gateway_port"], "/"),
+            ("privaite", privaite_python, metadata["proxy_port"], "/ready"),
         ):
             log = stack.enter_context((root / f"{role}.log").open("w"))
             started = time.monotonic()
             child = subprocess.Popen(
-                [str(repo / ".venv/bin/python"), str(HELPERS / "probe.py"), role, str(root)],
+                [str(python), str(HELPERS / "probe.py"), role, str(root)],
                 cwd=root,
                 env=env,
                 stdout=log,

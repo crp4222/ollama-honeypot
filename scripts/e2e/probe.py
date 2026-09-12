@@ -36,7 +36,8 @@ if ROLE == "gateway":
     )
     port = METADATA["gateway_port"]
 else:
-    sys.path.insert(0, METADATA["privaite"])
+    if METADATA.get("privaite"):
+        sys.path.insert(0, METADATA["privaite"])
     from privaite.pii.engine import PIIEngine
 
     original = PIIEngine.process_request
