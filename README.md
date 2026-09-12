@@ -12,6 +12,11 @@ redaction proxy used in the defensive comparison. The lab can be used on its own
 or with another filter. The comparison is intended to expose both successful
 redactions and remaining leaks.
 
+An [actual OpenCode A/B experiment](docs/OPENCODE-EXPERIMENT.md) includes disclosure
+checks, streaming, concurrent clients, and measured latency. The tested filter
+removed the synthetic canaries, but new large tool results were slow and the model
+did not always preserve reversible placeholders. The report includes those limits.
+
 **Scope:** run this against your own disposable agent environment with synthetic
 data. This build listens on localhost or a specific private LAN address. It does
 not provide a hosted public endpoint or configure Internet exposure.
@@ -201,6 +206,10 @@ pii:
   deanonymization:
     enabled: true
     fuzzy_matching: false
+  detection_cache:
+    enabled: true
+    max_entries: 4096
+    ttl_seconds: 1800
   passthrough:
     system_messages: false
     tool_calls: false
@@ -222,6 +231,13 @@ arguments, before forwarding. It can restore reversible replacements in response
 returned to the client. With the configuration above, secrets are redacted and
 cards masked irreversibly. Therefore, inspect the **capture after PrivAiTe** to
 measure outbound disclosure; the client display alone cannot establish it.
+
+This example opts into PrivAiTe's detection cache for repeated conversation text.
+It keeps salted hashes and detection span metadata, not raw text or reversible
+maps; see its [threat model](https://github.com/crp4222/PrivAiTe#threat-model).
+New files still incur detection cost. Wait for PrivAiTe's `/ready` endpoint before
+starting the client. The [measured experiment](docs/OPENCODE-EXPERIMENT.md#latency)
+separates initialization, cold filtering, and cache reuse.
 
 This is detection-based filtering, not a guarantee that every secret is found.
 Coverage differs by protocol and field. Tool definitions, object keys, and other
@@ -264,6 +280,11 @@ and Anthropic streaming calls, forced model/prompt handling, capture fidelity,
 quotas, and server isolation checks. These are functional checks, not a benchmark
 of protection against arbitrary agents or secrets.
 
+The [OpenCode experiment](docs/OPENCODE-EXPERIMENT.md) adds actual file reads and
+an A/B comparison with PrivAiTe, including cold-cache latency, larger tool results,
+concurrent clients, and a denied read. A macOS runner generates its own fixtures
+and records both disclosure and task-completion checks.
+
 Exploratory operator observations motivated the PrivAiTe comparison: some credential
 values were replaced with `[SECRET]`, while partial replacements and identifying
 paths remained visible. Those observations are not a published, controlled leak-rate
@@ -272,7 +293,7 @@ measurement. No universal protection rate or new CVE is claimed here.
 | Interface | Current scope |
 | --- | --- |
 | Ollama `/api/chat`, `/api/generate` | Implemented; a real `/api/chat` call was checked |
-| OpenAI `/v1/chat/completions` | Implemented; real calls checked, usable for the OpenCode comparison |
+| OpenAI `/v1/chat/completions` | OpenCode 1.18.30 workflow checked with and without PrivAiTe |
 | Anthropic `/v1/messages` | Real streaming call checked; a full Claude Code workflow needs separate validation |
 | OpenAI `/v1/responses` | Not implemented; this lab does not establish native Codex CLI support |
 | Model administration, embeddings, images, provider-hosted tools | Not exposed |
