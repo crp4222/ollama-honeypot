@@ -3041,6 +3041,55 @@
           ]
         }
       }
-    ]
+    ],
+    "container_publication": {
+      "workflow": "https://github.com/crp4222/PrivAiTe/actions/runs/34706216261",
+      "anonymous_registry_checks": {
+        "ghcr": {
+          "0.4.3": {
+            "status": 200,
+            "digest": "sha256:c900e1d4a6cb8e367d132ceb39e519778fe08af492ce540239168e475adedac2",
+            "platforms": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          },
+          "latest": {
+            "status": 200,
+            "digest": "sha256:c900e1d4a6cb8e367d132ceb39e519778fe08af492ce540239168e475adedac2",
+            "platforms": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          }
+        },
+        "dockerhub": {
+          "0.4.3": {
+            "status": 200,
+            "digest": "sha256:c900e1d4a6cb8e367d132ceb39e519778fe08af492ce540239168e475adedac2",
+            "platforms": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          },
+          "latest": {
+            "status": 200,
+            "digest": "sha256:c900e1d4a6cb8e367d132ceb39e519778fe08af492ce540239168e475adedac2",
+            "platforms": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          }
+        }
+      },
+      "native_image_smoke": {
+        "version": "0.4.3",
+        "offline_models_work": true,
+        "structured_boundaries_ok": true,
+        "restoration_ok": true,
+        "image_revision": "7798804a27c5558d550e48b667e2fa2a83bdded6",
+        "platform": "linux/arm64"
+      }
+    }
   }
 }

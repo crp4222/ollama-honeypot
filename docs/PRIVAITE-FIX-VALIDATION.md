@@ -180,3 +180,13 @@ processing was 3.25 seconds. Initialization took 19.4 seconds with cached ONNX w
 
 Only the installed-package path was used for this check. The developer option
 `--privaite /path/to/PrivAiTe` remains available for source changes.
+
+The [Docker publication workflow](https://github.com/crp4222/PrivAiTe/actions/runs/34706216261)
+also completed, including Docker Hub's description update. Anonymous registry
+requests verified that `0.4.3` and `latest` on GHCR and Docker Hub share the same
+manifest digest and publish both `linux/amd64` and `linux/arm64` images. The GHCR
+ARM64 image was then downloaded and run with networking disabled: both detector
+models initialized from their embedded cache, the email assignment and phone JSON
+boundaries were preserved, and reversible restoration passed. Its version and
+revision labels matched 0.4.3 and the tested source commit. Runtime smoke coverage
+here is ARM64; both architectures were built by the publication workflow.
