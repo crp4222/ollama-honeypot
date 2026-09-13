@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Captured request comparison</title><style>
+*{box-sizing:border-box}body{margin:0;background:#10151e;color:#e7edf5;font:17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:36px 42px}
+.kicker{color:#a9bfd5;font-size:13px;letter-spacing:.13em;font-weight:650;text-transform:uppercase}h1{font-size:34px;line-height:1.16;margin:8px 0 10px;font-weight:700;letter-spacing:-.025em}
+.subtitle{margin:0;color:#b6c2d1;font-size:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}.panel{border:1px solid #344152;background:#17202c;border-radius:12px;overflow:hidden}.bar{padding:14px 18px;background:#202c3b;font-size:18px;font-weight:650;display:flex;justify-content:space-between;align-items:center}.badge{font-size:13px;border-radius:30px;padding:4px 10px;background:#283b51;color:#cddff4}.direct .badge{background:#513531;color:#ffccba}.protected .badge{background:#21493e;color:#adedd5}.file{font:13px ui-monospace,Menlo,monospace;color:#a9bfd5;margin:18px 20px 8px}pre{font:15px/1.58 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;padding:0 20px 20px;color:#f2f5fa}.foot{font-size:14px;line-height:1.55;color:#bac7d7;margin-top:18px}.note{color:#edc58b}.answer{margin-top:26px}.answer pre{font-size:20px;line-height:1.65;padding:24px}.metrics{display:flex;gap:34px;margin-top:24px}.metric strong{display:block;font-size:25px;color:#bbecdb}.metric span{font-size:14px;color:#bdc9d7}
+</style><body><div class="kicker">Ollama Honeypot · actual OpenCode HTTP captures · 12 Sep 2026</div><h1>What reached the model endpoint</h1><p class="subtitle">Same synthetic files, separate conversations. Capture point: after the optional local filter, before Ollama.</p><main class="grid"><section class="panel direct"><div class="bar">Without PrivAiTe<span class="badge">7/7 full planted values received</span></div><div class="file">.env · tool result excerpt</div><pre>1: APP_PORT=8087
+2: DB_PORT=5433
+3: OPENAI_API_KEY=[SYNTHETIC_OPENAI_KEY]
+4: GITHUB_TOKEN=[SYNTHETIC_GITHUB_TOKEN]
+5: DB_PASSWORD=[SYNTHETIC_DB_PASSWORD]
+6: SUPPORT_EMAIL=camille.martin@example.com</pre><div class="file">customer.json · tool result excerpt</div><pre>1: {
+2:   &quot;name&quot;: &quot;Camille Martin&quot;,
+3:   &quot;email&quot;: &quot;camille.martin@example.com&quot;,
+4:   &quot;phone&quot;: &quot;+33 6 12 34 56 78&quot;,
+5:   &quot;credit_card&quot;: &quot;4111 1111 1111 1111&quot;,
+6:   &quot;synthetic&quot;: true
+7: }</pre></section><section class="panel protected"><div class="bar">With PrivAiTe 0.4.3<span class="badge">0/7 full planted values received</span></div><div class="file">.env · tool result excerpt</div><pre>1: APP_PORT=8087
+2: DB_PORT=5433
+3: OPENAI_API_KEY=[SECRET]
+4: GITHUB[SECRET]=[SECRET]
+5: [SECRET]
+6: SUPPORT_EMAIL=&lt;EMAIL_ADDRESS_1&gt;</pre><div class="file">customer.json · tool result excerpt</div><pre>1: {
+2:   &quot;name&quot;: &quot;&lt;PERSON_1&gt;&quot;,
+3:   &quot;email&quot;: &quot;&lt;EMAIL_ADDRESS_1&gt;&quot;,
+4:   &quot;phone&quot;: &quot;&lt;PHONE_NUMBER_1&gt;&quot;,
+5:   &quot;credit_card&quot;: &quot;*******************&quot;,
+6:   &quot;synthetic&quot;: true
+7: }</pre></section></main><div class="foot">Credential values are publication aliases: [SYNTHETIC_…]. [SECRET], typed placeholders and masks are actual filter output.<br>Path wrappers omitted. Figures render captured excerpts; they are not OpenCode UI screenshots or simulated conversations.<br><span class="note">Remaining false positives are visible: the protected .env loses part of GITHUB_TOKEN and the password assignment label.</span></div></body></html>

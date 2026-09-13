@@ -1,6 +1,8 @@
 [project]
 name = "ollama-honeypot"
 version = "0.1.0"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
 description = "Local-first Ollama Cloud observation gateway"
 requires-python = ">=3.11"
 dependencies = ["anyio>=4,<5", "httpx>=0.28,<0.29", "starlette>=0.47,<1", "uvicorn>=0.35,<1"]

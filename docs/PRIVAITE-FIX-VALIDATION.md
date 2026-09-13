@@ -1,7 +1,7 @@
 # PrivAiTe 0.4.3 follow-up validation
 
 Measured on 2026-09-12 with the same host, installed detectors, Ollama cloud
-model and isolation described in the [original experiment](OPENCODE-EXPERIMENT.md).
+model and isolation described in the [original experiment](OPENCODE-0.4.2.md).
 The original measurements remain available; this follow-up tests the fixes in
 PrivAiTe source commit `7798804a27c5558d550e48b667e2fa2a83bdded6`.
 The source was uncommitted during the full OpenCode run and committed afterwards.
@@ -18,7 +18,7 @@ No real credentials or personal files were used.
   delimiters, common email assignment labels, and `<path>` wrappers. Refinement
   happens before union merging; arbitrary secret punctuation and custom-pattern
   spans are preserved. This does not exempt path contents from scanning.
-- [English placeholder instructions](https://github.com/crp4222/PrivAiTe/blob/7798804a27c5558d550e48b667e2fa2a83bdded6/docs/placeholder-instructions.txt)
+- [English placeholder instructions](https://github.com/crp4222/PrivAiTe/blob/v0.4.3/docs/placeholder-instructions.txt)
   ask a cooperative model to copy placeholders exactly, including in tool
   arguments. PrivAiTe does not inject them automatically.
 
@@ -37,13 +37,16 @@ guarantee about secret detection.
 | --- | --- | --- | --- |
 | Three small files, first conversation | 8.12 s | 12.53 s | 4.00 s |
 | Small files, explicit short copy instruction, two trials | — | 7.62–8.82 s | 0.49–0.94 s |
-| One new 26,337-byte log | 7.58 s | 15.95 s | 8.12 s |
-| Four new logs, 105,488 bytes total | 14.37 s | 26.16 s | 17.46 s |
+| One new 27,879-byte log | 7.58 s | 15.95 s | 8.12 s |
+| Four new logs, 111,656 bytes total | 14.37 s | 26.16 s | 17.46 s |
 | Two simultaneous clients | — | 9.10–12.09 s each | 0.72–0.76 s each |
 
 The four-log PII time was 31.91 seconds in the original experiment, versus
-17.46 seconds here. These separate autonomous runs have different generated
-credentials and cloud responses, so the wall-time comparison is observational.
+17.46 seconds here. The original fixture total was 105,488 bytes; the checked-in
+runner generated 111,656 bytes. The sizes above were corrected against the run
+metadata on 2026-09-13. These separate autonomous runs also have different
+generated credentials and cloud responses, so this is an observational comparison.
+The same-request replay below isolates the cache change more directly.
 The service became ready in 12.1 seconds. Fresh non-repeating context still needs
 inference, and a long first response can still exceed a stricter client timeout.
 The runner uses the timeout settings documented in the original experiment.
@@ -132,7 +135,7 @@ Those unassisted failures remain visible in the report rather than being exclude
 | Small files, first conversation | 15.11 s | 20.76 s | 4.81 s |
 | Small files, full English instruction | — | 8.94–9.07 s | 0.57–0.87 s |
 | One new large log | 9.60 s | 23.90 s | 8.87 s |
-| Four new logs | 9.06 s | 28.79 s | 17.48 s |
+| Four new logs, 111,656 bytes total | 9.06 s | 28.79 s | 17.48 s |
 | Two concurrent clients | — | 12.60–13.18 s each | 0.86–0.88 s each |
 
 Model initialization took 20.9 seconds in this run. The long protected case chose
@@ -155,10 +158,10 @@ capture; real model/tool behavior is covered by the OpenCode matrix above.
 
 The setup supplies the same [bounded educational prompt](../config/system.educational.txt)
 as the tested runner. At that pre-release check, PyPI still served 0.4.2; the
-current README uses the versioned 0.4.3 package. The pushed lab remains private,
-and it does not yet include a license
-file. Decide public access and licensing before describing it as an open-source
-project readers can reuse.
+current README uses the versioned 0.4.3 package. At that check the lab was private
+and had no license. A BSD-3-Clause
+[license](../LICENSE) was added on 2026-09-13. Repository visibility is managed
+separately; readers need public access to reproduce the linked experiment.
 
 ## Published package validation
 

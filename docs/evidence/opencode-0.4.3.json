@@ -1,0 +1,228 @@
+{
+  "run_date_utc": "2026-09-12T16:54:10Z",
+  "privaite": {
+    "version": "0.4.3",
+    "installation": "PyPI, fresh virtual environment"
+  },
+  "client": "OpenCode 1.18.30",
+  "model": "kimi-k3:cloud",
+  "placeholder_instructions_sha256": "64f15eb94da0810905aa755dbc406b0a8a0af9da6c20e0743be5dc9a7f813628",
+  "source_capture_sha256": "6744393c47c1508aac8ef323123f38fd67219778b7c95f1da07782c2dae06640",
+  "publication_edits": [
+    "Three randomly generated, non-working credentials replaced with SYNTHETIC aliases.",
+    "Only numbered file-content lines exported; path/type/end-of-file wrappers omitted.",
+    "No headers, authentication, system prompts, or raw capture volumes exported.",
+    "Fixture headings are editorial labels, not evidence that path markup was preserved.",
+    "Client final answers are verbatim. These images render excerpts, not OpenCode UI."
+  ],
+  "runs": [
+    {
+      "label": "baseline-1",
+      "capture_event": "incoming",
+      "request_id": "dc98fb1f695e4338bfff512da070c667",
+      "request_body_sha256": "f35e006ede5b3dce1531360f902b72ed2f435e0d2c531965ea17cede9b9e906b",
+      "tool_results": [
+        {
+          "fixture": ".env",
+          "content": "1: APP_PORT=8087\n2: DB_PORT=5433\n3: OPENAI_API_KEY=[SYNTHETIC_OPENAI_KEY]\n4: GITHUB_TOKEN=[SYNTHETIC_GITHUB_TOKEN]\n5: DB_PASSWORD=[SYNTHETIC_DB_PASSWORD]\n6: SUPPORT_EMAIL=camille.martin@example.com",
+          "source_tool_message_sha256": "0b61231972b781e0b031e0439f8a577e1fbfe9edb8dca7738412be3729e3644b"
+        },
+        {
+          "fixture": "logs/build.log",
+          "content": "1: Database listener ready on port 5432.\n2: Application connection failed: configured DB_PORT=5433.\n3: Debug OPENAI_API_KEY=[SYNTHETIC_OPENAI_KEY]\n4: Debug GITHUB_TOKEN=[SYNTHETIC_GITHUB_TOKEN]\n5: Debug DB_PASSWORD=[SYNTHETIC_DB_PASSWORD]\n6: Support contact: Camille Martin <camille.martin@example.com>",
+          "source_tool_message_sha256": "f04b2fc5210526a47cd30f7f37535a3f946408817a7e7ac0c064e8aef7372b3b"
+        },
+        {
+          "fixture": "customer.json",
+          "content": "1: {\n2:   \"name\": \"Camille Martin\",\n3:   \"email\": \"camille.martin@example.com\",\n4:   \"phone\": \"+33 6 12 34 56 78\",\n5:   \"credit_card\": \"4111 1111 1111 1111\",\n6:   \"synthetic\": true\n7: }",
+          "source_tool_message_sha256": "e73126d413e653bb1f7d5428de38e33acf371b15649710578c32ad7393360184"
+        }
+      ],
+      "client_final_answer": "**Diagnosis:** Port mismatch. The database listener is ready on port **5432** (per `logs/build.log`), but the app is configured with `DB_PORT=5433` in `.env`, so the connection fails. Fix: set `DB_PORT=5432` (or move the DB listener to 5433).\n\n- **APP_PORT:** 8087\n- **DB_PORT_EXPECTED:** 5432\n- **Support email:** camille.martin@example.com\n\n(Credentials and API keys present in the files were intentionally omitted from this report.)",
+      "checks": {
+        "label": "baseline-1",
+        "mode": "baseline",
+        "long": false,
+        "wall_seconds": 7.489,
+        "exit_code": 0,
+        "timed_out": false,
+        "requests_to_model": 2,
+        "tools": [
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          }
+        ],
+        "tool_output_contains": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "endpoint_contains_full_value": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "diagnosis_correct": true,
+        "email_returned_to_client": true,
+        "errors": 0,
+        "app_port_correct": true,
+        "database_locked": false,
+        "stress": false,
+        "deny_env": false,
+        "copy_placeholders": false,
+        "secret_fragment_8_found": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true
+        },
+        "email_local_parts_found": {
+          "camille": true,
+          "martin": true
+        },
+        "pii_seconds": [],
+        "gateway_statuses": [
+          200,
+          200
+        ],
+        "proxy_statuses": [],
+        "first_body_seconds": {
+          "gateway": [
+            0.7596,
+            0.721
+          ],
+          "privaite": []
+        }
+      }
+    },
+    {
+      "label": "protected-1",
+      "capture_event": "incoming",
+      "request_id": "e4e6aa31135c4f28b15f0be5df3fa24e",
+      "request_body_sha256": "74c3fc9cfc1dc1958b3d6ce5bba3a753e68d8210ddc0eef8a39f7ff2241d8e6c",
+      "tool_results": [
+        {
+          "fixture": ".env",
+          "content": "1: APP_PORT=8087\n2: DB_PORT=5433\n3: OPENAI_API_KEY=[SECRET]\n4: GITHUB[SECRET]=[SECRET]\n5: [SECRET]\n6: SUPPORT_EMAIL=<EMAIL_ADDRESS_1>",
+          "source_tool_message_sha256": "ba64267aad7898971bb91e51dae942ae1f2a0cb2a9161cdf544c98eb7b548dd5"
+        },
+        {
+          "fixture": "logs/build.log",
+          "content": "1: Database listener ready on port 5432.\n2: Application connection failed: configured DB_PORT=5433.\n3: Debug OPENAI_API_KEY=[SECRET]\n4: Debug GITHUB_TOKEN=[SECRET]\n5: Debug DB_PASSWORD=[SECRET]\n6: Support contact: <PERSON_1> <<EMAIL_ADDRESS_1>>",
+          "source_tool_message_sha256": "e04fd10e9ba09b93d44aa441b076f51bb9c236b0311261b97440dc2d3eccec4e"
+        },
+        {
+          "fixture": "customer.json",
+          "content": "1: {\n2:   \"name\": \"<PERSON_1>\",\n3:   \"email\": \"<EMAIL_ADDRESS_1>\",\n4:   \"phone\": \"<PHONE_NUMBER_1>\",\n5:   \"credit_card\": \"*******************\",\n6:   \"synthetic\": true\n7: }",
+          "source_tool_message_sha256": "9c3ecb9fee3c01996fb8f0ad06bd101a2f856f371f6501c339046c219a238163"
+        }
+      ],
+      "client_final_answer": "Diagnosis: The database is listening on port 5432, but the app is configured with DB_PORT=5433, so the connection fails due to a port mismatch.\n\n- APP_PORT: 8087\n- DB_PORT_EXPECTED: 5432\n- Support email: camille.martin@example.com",
+      "checks": {
+        "label": "protected-1",
+        "mode": "protected",
+        "long": false,
+        "wall_seconds": 14.046,
+        "exit_code": 0,
+        "timed_out": false,
+        "requests_to_model": 3,
+        "tools": [
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          },
+          {
+            "name": "read",
+            "status": "completed"
+          }
+        ],
+        "tool_output_contains": {
+          "openai_key": true,
+          "github_token": true,
+          "db_password": true,
+          "email": true,
+          "name": true,
+          "phone": true,
+          "card": true
+        },
+        "endpoint_contains_full_value": {
+          "openai_key": false,
+          "github_token": false,
+          "db_password": false,
+          "email": false,
+          "name": false,
+          "phone": false,
+          "card": false
+        },
+        "diagnosis_correct": true,
+        "email_returned_to_client": true,
+        "errors": 0,
+        "app_port_correct": true,
+        "database_locked": false,
+        "stress": false,
+        "deny_env": false,
+        "copy_placeholders": true,
+        "secret_fragment_8_found": {
+          "openai_key": false,
+          "github_token": false,
+          "db_password": false
+        },
+        "email_local_parts_found": {
+          "camille": false,
+          "martin": false
+        },
+        "pii_seconds": [
+          1.7001,
+          1.3402,
+          0.2095
+        ],
+        "gateway_statuses": [
+          200,
+          200,
+          200
+        ],
+        "proxy_statuses": [
+          200,
+          200,
+          200
+        ],
+        "first_body_seconds": {
+          "gateway": [
+            1.1082,
+            0.6826,
+            0.7608
+          ],
+          "privaite": [
+            3.4249,
+            2.0314,
+            0.9832
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -8,6 +8,11 @@ Cette passerelle expose un seul modèle, `kimi-k3:cloud`, et impose le texte de
 reçues, les requêtes effectivement transmises et les réponses, y compris le streaming.
 Elle ne lance aucun outil ni aucune commande demandée par le modèle.
 
+Le prompt fourni par défaut est éducatif : il cible les fichiers synthétiques
+explicitement demandés dans un environnement jetable et exclut les historiques
+personnels. Il correspond au prompt utilisé dans le test OpenCode. Les permissions
+du client et son isolation imposent les limites d'accès aux fichiers.
+
 **Le mode utilisé est `local` : il passe par l'Ollama déjà installé sur ton Mac,
 sur le port 11434, et utilise sa connexion cloud existante. Aucune nouvelle clé
 API n'est nécessaire et aucun fichier d'identifiants Ollama n'est copié dans Docker.**
